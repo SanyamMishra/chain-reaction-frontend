@@ -4,25 +4,21 @@ import { UserProfile } from '../models/user-profile.model';
 import * as UserProfileActions from './userProfile.actions';
 
 const initialState: UserProfile = {
-  name: '',
-  avatarId: '',
+  name: 'Sanyam Mishra',
+  avatarId: 'Memoji-12',
   musicEnabled: true,
   soundEffectsEnabled: true,
   vibrationEnabled: true
 };
 
-const _userProfileReducer = createReducer(
+export const userProfileReducer = createReducer<UserProfile>(
   initialState,
-  on(UserProfileActions.updateName, (state, { name }) => ({ ...state, name })),
-  on(UserProfileActions.updateAvatar, (state, { avatarId }) => ({ ...state, avatarId })),
-  on(UserProfileActions.enableMusic, (state) => ({ ...state, musicEnabled: true })),
-  on(UserProfileActions.disableMusic, (state) => ({ ...state, musicEnabled: false })),
-  on(UserProfileActions.enableSoundEffects, (state) => ({ ...state, soundEffectsEnabled: true })),
-  on(UserProfileActions.disableSoundEffects, (state) => ({ ...state, soundEffectsEnabled: false })),
-  on(UserProfileActions.enableVibration, (state) => ({ ...state, vibrationEnabled: true })),
-  on(UserProfileActions.disableVibration, (state) => ({ ...state, vibrationEnabled: false })),
+  on(UserProfileActions.updateNameDone, (state, { name }) => ({ ...state, name })),
+  on(UserProfileActions.updateAvatarIdDone, (state, { avatarId }) => ({ ...state, avatarId })),
+  on(UserProfileActions.enableMusicDone, (state) => ({ ...state, musicEnabled: true })),
+  on(UserProfileActions.disableMusicDone, (state) => ({ ...state, musicEnabled: false })),
+  on(UserProfileActions.enableSoundEffectsDone, (state) => ({ ...state, soundEffectsEnabled: true })),
+  on(UserProfileActions.disableSoundEffectsDone, (state) => ({ ...state, soundEffectsEnabled: false })),
+  on(UserProfileActions.enableVibrationDone, (state) => ({ ...state, vibrationEnabled: true })),
+  on(UserProfileActions.disableVibrationDone, (state) => ({ ...state, vibrationEnabled: false })),
 );
-
-export function userProfileReducer(state, action) {
-  return _userProfileReducer(state, action);
-}
