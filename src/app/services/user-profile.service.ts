@@ -1,21 +1,24 @@
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../models/user-profile.model';
-
+import { initialState } from '../store/user-profile/user-profile.reducer';
 @Injectable({
   providedIn: 'root'
 })
 export class UserProfileService {
-  private getUserProfile(): UserProfile {
+  loadUserProfile(): UserProfile {
     let userProfileData = localStorage.getItem('userProfile');
-    if (!userProfileData) {
-      userProfileData = '{}';
+
+    let userProfile = initialState;
+
+    if (userProfileData) {
+      userProfile = JSON.parse(userProfileData);
     }
 
-    return JSON.parse(userProfileData);
+    return userProfile;
   }
 
   updateName(name: string) {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -24,7 +27,7 @@ export class UserProfileService {
   }
 
   updateAvatar(avatarId: string) {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -33,7 +36,7 @@ export class UserProfileService {
   }
 
   enableMusic() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -42,7 +45,7 @@ export class UserProfileService {
   }
 
   disableMusic() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -51,7 +54,7 @@ export class UserProfileService {
   }
 
   enableSoundEffects() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -60,7 +63,7 @@ export class UserProfileService {
   }
 
   disableSoundEffects() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -69,7 +72,7 @@ export class UserProfileService {
   }
 
   enableVibration() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,
@@ -78,7 +81,7 @@ export class UserProfileService {
   }
 
   disableVibration() {
-    const userProfile = this.getUserProfile();
+    const userProfile = this.loadUserProfile();
 
     localStorage.setItem('userProfile', JSON.stringify({
       ...userProfile,

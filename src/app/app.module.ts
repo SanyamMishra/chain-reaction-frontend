@@ -1,28 +1,42 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { userProfileReducer } from './store/userProfile.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { UserProfileEffects } from './store/userProfile.effects';
+import { userProfileReducer } from './store/user-profile/user-profile.reducer';
+import { UserProfileEffects } from './store/user-profile/user-profile.effects';
+import { SharedModule } from './shared.module';
+import { LogoComponent } from './components/logo/logo.component';
+import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
+import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
+import { viewStateReducer } from './store/view-state/view-state.reducer';
+import { AppLoaderComponent } from './components/app-loader/app-loader.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LogoComponent,
+    UserProfileSettingsComponent,
+    AvatarSelectionComponent,
+    AppLoaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
+    FormsModule,
     StoreModule.forRoot({
-      userProfile: userProfileReducer
+      userProfile: userProfileReducer,
+      viewState: viewStateReducer
     }),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([UserProfileEffects])
+    EffectsModule.forRoot([
+      UserProfileEffects
+    ]),
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { AppState } from "./app.state";
+import { AppState } from "../app.state";
 
 export const selectName = createSelector(
   (state: AppState) => state.userProfile,

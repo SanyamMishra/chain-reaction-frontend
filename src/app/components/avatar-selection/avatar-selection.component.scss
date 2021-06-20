@@ -1,0 +1,8 @@
+.avatar {
+  cursor: pointer;
+  transition: transform 400ms;
+}
+
+.avatar:hover {
+  transform: scale(1.1, 1.1);
+}

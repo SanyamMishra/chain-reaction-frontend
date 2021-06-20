@@ -1,28 +1,10 @@
-<h1>User Profile</h1>
+<app-loader></app-loader>
 
-<ul>
-  <li>Name: {{name$ | async}}</li>
-  <li><img src="/assets/avatars/{{avatarId$ | async}}.png" alt=""> </li>
-  <li>Music: {{musicEnabled$ | async}}</li>
-  <li>Sound Effects: {{soundEffectsEnabled$ | async}}</li>
-  <li>Vibration: {{vibrationEnabled$ | async}}</li>
-</ul>
-
-<form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
-  <label for="userName">User Name: </label>
-  <input type="text" id="userName" formControlName="name">
-  <br>
-  <label for="avatar">Avatar: </label>
-  <input type="text" id="avatar" formControlName="avatarId">
-  <br>
-  <label for="musicEnabled">Music: </label>
-  <input type="checkbox" id="musicEnabled" formControlName="musicEnabled">
-  <br>
-  <label for="soundEffectsEnabled">Sound Effects: </label>
-  <input type="checkbox" id="soundEffectsEnabled" formControlName="soundEffectsEnabled">
-  <br>
-  <label for="vibrationEnabled">Vibration: </label>
-  <input type="checkbox" id="vibrationEnabled" formControlName="vibrationEnabled">
-  <br>
-  <button type="submit">Submit</button>
-</form>
+<nz-layout>
+  <nz-header>
+    <app-logo></app-logo>
+  </nz-header>
+  <nz-content>
+    <app-user-profile-settings></app-user-profile-settings>
+  </nz-content>
+</nz-layout>

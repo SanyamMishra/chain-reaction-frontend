@@ -1,0 +1,5 @@
+<div class="w-100 h-100 d-flex justify-content-center align-items-center"
+  [ngClass]="{'d-none': !(isAppLoaderScreenVisible$ | async)}">
+  <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin>
+</div>
+<ng-template #indicatorTemplate><i nz-icon nzType="loading" class="fs-1"></i></ng-template>

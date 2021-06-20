@@ -1,0 +1,46 @@
+<div nz-row class="mt-5" nzAlign="middle" nzJustify="center"
+  [ngClass]="{'d-none': !(isUserProfileSettingsScreenVisible$ | async)}">
+  <div nz-col nzSpan="24">
+    <div nz-row nzAlign="middle" nzJustify="center">
+      <div nz-col>
+        <div class="avatar-holder">
+          <nz-avatar nzSrc="/assets/avatars/{{avatarId$ | async}}.png" [nzSize]="200"></nz-avatar>
+          <span class="material-icons edit-avatar" (click)="onEditAvatarClick()">edit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div nz-col nzSpan="24" class="mt-5">
+    <div nz-row nzAlign="middle" nzJustify="center">
+      <div nz-col>
+        <input nz-input placeholder="Enter Name" nzSize="large" class="text-center fs-2" [value]="name$ | async"
+          nzBorderless (blur)="onNameUpdate($event)" />
+      </div>
+    </div>
+  </div>
+
+  <div nz-col nzSpan="4" class="mt-5">
+    <div nz-row nzAlign="middle" nzJustify="center">
+
+      <div nz-col nzSpan="24" class="d-flex align-items-center justify-content-between mb-2">
+        <span class="fs-5 d-inline-block mx-3">Music</span>
+        <nz-switch [(ngModel)]="musicEnabled"></nz-switch>
+      </div>
+
+      <div nz-col nzSpan="24" class="d-flex align-items-center justify-content-between mb-2">
+        <span class="fs-5 d-inline-block mx-3">Sound Effects</span>
+        <nz-switch [(ngModel)]="soundEffectsEnabled"></nz-switch>
+      </div>
+
+      <div nz-col nzSpan="24" class="d-flex align-items-center justify-content-between mb-2">
+        <span class="fs-5 d-inline-block mx-3">Vibrations</span>
+        <nz-switch [(ngModel)]="vibrationEnabled"></nz-switch>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<app-avatar-selection></app-avatar-selection>

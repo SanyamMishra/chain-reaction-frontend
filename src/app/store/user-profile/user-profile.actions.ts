@@ -1,4 +1,11 @@
 import { createAction, props } from '@ngrx/store';
+import { UserProfile } from 'src/app/models/user-profile.model';
+
+export const loadUserProfile = createAction('[User Profile] Load User Profile');
+export const loadUserProfileDone = createAction(
+  '[User Profile] Load User Profile Done',
+  props<{ userProfile: UserProfile }>()
+);
 
 export const updateName = createAction(
   '[User Profile] Update Name',

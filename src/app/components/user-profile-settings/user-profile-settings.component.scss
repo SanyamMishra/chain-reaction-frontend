@@ -1,0 +1,43 @@
+.container {
+  // margin: 2rem;
+  border: 1px solid red;
+}
+
+nz-avatar {
+  background: #f6f6f7;
+  border: 0.5rem solid #fff;
+  box-shadow:
+    0 0.9px 1.7px rgba(0, 0, 0, 0.011),
+    0 2.1px 4.1px rgba(0, 0, 0, 0.016),
+    0 4px 7.8px rgba(0, 0, 0, 0.02),
+    0 7.1px 13.8px rgba(0, 0, 0, 0.024),
+    0 13.4px 25.9px rgba(0, 0, 0, 0.029),
+    0 32px 62px rgba(0, 0, 0, 0.04);
+}
+
+.avatar-holder {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.edit-avatar {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  border: 0.5rem solid #fff;
+  border-radius: 50%;
+  background-color: #1b1b1b;
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 400ms;
+}
+
+.edit-avatar:hover {
+  background-color: #1b1b1bdd;
+}

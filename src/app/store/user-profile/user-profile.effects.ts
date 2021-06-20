@@ -2,12 +2,24 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { exhaustMap } from 'rxjs/operators';
-import { UserProfileService } from "../services/user-profile.service";
-import { AppState } from "./app.state";
-import * as UserProfileActions from "./userProfile.actions";
+import { UserProfileService } from "../../services/user-profile.service";
+import * as ViewStateActions from "../view-state/view-state.actions";
+import * as UserProfileActions from "./user-profile.actions";
 
 @Injectable()
 export class UserProfileEffects {
+  loadUserProfile$ = createEffect(() => this.actions$.pipe(
+    ofType(UserProfileActions.loadUserProfile),
+    exhaustMap((action) => {
+      const userProfile = this.userProfileService.loadUserProfile();
+      return of(
+        UserProfileActions.loadUserProfileDone({ userProfile }),
+        ViewStateActions.hideAppLoaderScreen(),
+        ViewStateActions.showUserProfileSettingsScreen()
+      );
+    })
+  ));
+
   updateName$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.updateName),
     exhaustMap((action) => {

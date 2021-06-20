@@ -1,5 +1,5 @@
 export interface UserProfile {
-  name: string,
+  name: string;
   avatarId: string;
   musicEnabled: boolean;
   soundEffectsEnabled: boolean;

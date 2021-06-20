@@ -1,11 +1,11 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { UserProfile } from '../models/user-profile.model';
-import * as UserProfileActions from './userProfile.actions';
+import { UserProfile } from '../../models/user-profile.model';
+import * as UserProfileActions from './user-profile.actions';
 
-const initialState: UserProfile = {
-  name: 'Sanyam Mishra',
-  avatarId: 'Memoji-12',
+export const initialState: UserProfile = {
+  name: '',
+  avatarId: 'Memoji-01',
   musicEnabled: true,
   soundEffectsEnabled: true,
   vibrationEnabled: true
@@ -13,6 +13,7 @@ const initialState: UserProfile = {
 
 export const userProfileReducer = createReducer<UserProfile>(
   initialState,
+  on(UserProfileActions.loadUserProfileDone, (state, { userProfile }) => ({ ...userProfile })),
   on(UserProfileActions.updateNameDone, (state, { name }) => ({ ...state, name })),
   on(UserProfileActions.updateAvatarIdDone, (state, { avatarId }) => ({ ...state, avatarId })),
   on(UserProfileActions.enableMusicDone, (state) => ({ ...state, musicEnabled: true })),
