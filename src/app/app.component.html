@@ -1,10 +1,12 @@
 <app-loader></app-loader>
 
 <nz-layout>
-  <nz-header>
-    <app-logo></app-logo>
-  </nz-header>
-  <nz-content>
+  <header class="shadow px-4 d-flex align-items-center justify-content-center">
+    <app-back-button></app-back-button>
+    <app-logo class="flex-grow-1 text-center"></app-logo>
+    <app-more-button></app-more-button>
+  </header>
+  <main class=" px-4">
     <app-user-profile-settings></app-user-profile-settings>
-  </nz-content>
+  </main>
 </nz-layout>
