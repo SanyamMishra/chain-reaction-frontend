@@ -1,5 +1,5 @@
-<nz-drawer [nzClosable]="true" [nzVisible]="(isAvatarSelectionScreenVisible$ | async)!" nzPlacement="bottom"
-  nzHeight="calc(100% - 64px)" (nzOnClose)="close()">
+<nz-drawer [nzClosable]="false" [nzMask]="false" [nzVisible]="(isAvatarSelectionScreenVisible$ | async)!"
+  nzPlacement="bottom" nzHeight="calc(100% - 64px)" (nzOnClose)="close()">
   <ng-container *nzDrawerContent>
     <div nz-row>
       <div nz-col nzXs="12" nzMd="8" nzLg="6" nzXl="4" *ngFor="let avatarId of avatarIds">

@@ -15,6 +15,8 @@ import { UserProfileSettingsComponent } from './components/user-profile-settings
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
 import { viewStateReducer } from './store/view-state/view-state.reducer';
 import { AppLoaderComponent } from './components/app-loader/app-loader.component';
+import { BackButtonComponent } from './components/back-button/back-button.component';
+import { MoreButtonComponent } from './components/more-button/more-button.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AppLoaderComponent } from './components/app-loader/app-loader.component
     LogoComponent,
     UserProfileSettingsComponent,
     AvatarSelectionComponent,
-    AppLoaderComponent
+    AppLoaderComponent,
+    BackButtonComponent,
+    MoreButtonComponent
   ],
   imports: [
     BrowserModule,
