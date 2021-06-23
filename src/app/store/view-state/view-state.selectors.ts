@@ -15,3 +15,8 @@ export const selectIsUserProfileSettingsScreenVisible = createSelector(
   (state: AppState) => state.viewState,
   state => state.isUserProfileSettingsScreenVisible
 );
+
+export const selectBackButtonAction = createSelector(
+  (state: AppState) => state.viewState,
+  state => state.backButtonAction
+);

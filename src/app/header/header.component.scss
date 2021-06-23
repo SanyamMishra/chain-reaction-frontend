@@ -1,0 +1,13 @@
+header {
+  width: 100%;
+  position: fixed;
+  background-color: #272838;
+  height: 4rem;
+  z-index: 1;
+}
+
+.back-button, .more-button {
+  color: #fff;
+  cursor: pointer;
+  width: 4rem;
+}
