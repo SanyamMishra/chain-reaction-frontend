@@ -9,14 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { userProfileReducer } from './store/user-profile/user-profile.reducer';
 import { UserProfileEffects } from './store/user-profile/user-profile.effects';
+import { ViewStateEffects } from './store/view-state/view-state.effects';
 import { SharedModule } from './shared.module';
 import { LogoComponent } from './components/logo/logo.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
 import { viewStateReducer } from './store/view-state/view-state.reducer';
 import { AppLoaderComponent } from './components/app-loader/app-loader.component';
-import { BackButtonComponent } from './components/back-button/back-button.component';
-import { MoreButtonComponent } from './components/more-button/more-button.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -25,8 +25,7 @@ import { MoreButtonComponent } from './components/more-button/more-button.compon
     UserProfileSettingsComponent,
     AvatarSelectionComponent,
     AppLoaderComponent,
-    BackButtonComponent,
-    MoreButtonComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +37,8 @@ import { MoreButtonComponent } from './components/more-button/more-button.compon
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([
-      UserProfileEffects
+      UserProfileEffects,
+      ViewStateEffects
     ]),
     SharedModule
   ],

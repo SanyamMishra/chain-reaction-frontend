@@ -4,7 +4,7 @@ import { UserProfile } from 'src/app/models/user-profile.model';
 import { AppState } from 'src/app/store/app.state';
 import * as UserProfileSelectors from '../../store/user-profile/user-profile.selectors';
 import * as UserProfileActions from '../../store/user-profile/user-profile.actions';
-import * as ViewStateActions from '../../store/view-state/view-state.actions';
+import { showAvatarSelectionScreen } from '../../store/view-state/view-state.actions';
 import { Subscription } from 'rxjs';
 import { selectIsUserProfileSettingsScreenVisible } from 'src/app/store/view-state/view-state.selectors';
 
@@ -40,7 +40,7 @@ export class UserProfileSettingsComponent implements OnDestroy {
   }
 
   onEditAvatarClick() {
-    this.store.dispatch(ViewStateActions.showAvatarSelectionScreen());
+    this.store.dispatch(showAvatarSelectionScreen());
   }
 
   onNameUpdate(event: Event) {
