@@ -16,7 +16,8 @@ import { UserProfileSettingsComponent } from './components/user-profile-settings
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
 import { viewStateReducer } from './store/view-state/view-state.reducer';
 import { AppLoaderComponent } from './components/app-loader/app-loader.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeaderComponent } from './header/header.component';
     UserProfileSettingsComponent,
     AvatarSelectionComponent,
     AppLoaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

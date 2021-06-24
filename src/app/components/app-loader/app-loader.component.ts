@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { selectIsAppLoaderScreenVisible } from 'src/app/store/view-state/view-state.selectors';
+import { loadUserProfile } from 'src/app/store/user-profile/user-profile.actions';
 
 @Component({
   selector: 'app-loader',
@@ -9,10 +9,9 @@ import { selectIsAppLoaderScreenVisible } from 'src/app/store/view-state/view-st
   styleUrls: ['./app-loader.component.scss']
 })
 export class AppLoaderComponent implements OnInit {
-  isAppLoaderScreenVisible$ = this.store.select(selectIsAppLoaderScreenVisible);
-
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(loadUserProfile());
   }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { selectBackButtonAction } from 'src/app/store/view-state/view-state.selectors';
-import { goBack } from '../store/view-state/view-state.actions';
+import { goBack } from '../../store/view-state/view-state.actions';
 
 @Component({
   selector: 'app-header',
