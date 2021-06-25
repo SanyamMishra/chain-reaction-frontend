@@ -7,6 +7,7 @@ import * as UserProfileActions from '../../store/user-profile/user-profile.actio
 import { showAvatarSelectionScreen } from '../../store/view-state/view-state.actions';
 import { Subscription } from 'rxjs';
 import { selectIsUserProfileSettingsScreenVisible } from 'src/app/store/view-state/view-state.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -16,13 +17,12 @@ import { selectIsUserProfileSettingsScreenVisible } from 'src/app/store/view-sta
 export class UserProfileSettingsComponent implements OnDestroy {
   name$ = this.store.select(UserProfileSelectors.selectName);
   avatarId$ = this.store.select(UserProfileSelectors.selectAvatarId);
-  isUserProfileSettingsScreenVisible$ = this.store.select(selectIsUserProfileSettingsScreenVisible);
   private _musicEnabled = false;
   private _soundEffectsEnabled = false;
   private _vibrationEnabled = false;
   private subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.subscriptions.push(
       this.store.select(UserProfileSelectors.selectMusicEnabled)
         .subscribe(musicEnabled => this._musicEnabled = musicEnabled)
@@ -40,7 +40,7 @@ export class UserProfileSettingsComponent implements OnDestroy {
   }
 
   onEditAvatarClick() {
-    this.store.dispatch(showAvatarSelectionScreen());
+    this.router.navigate(['/', 'profile', 'select-avatar']);
   }
 
   onNameUpdate(event: Event) {

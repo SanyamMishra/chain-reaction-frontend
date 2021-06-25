@@ -11,8 +11,15 @@ import * as UserProfileActions from "./user-profile.actions";
 export class UserProfileEffects {
   loadUserProfile$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.loadUserProfile),
-    tap(() => {
+    exhaustMap(() => {
       const userProfile = this.userProfileService.loadUserProfile();
+      return of(UserProfileActions.loadUserProfileDone({ userProfile }));
+    })
+  ));
+
+  loadUserProfileDone$ = createEffect(() => this.actions$.pipe(
+    ofType(UserProfileActions.loadUserProfileDone),
+    tap(({ userProfile }) => {
       if (!userProfile.name) {
         this.router.navigate(['/', 'profile']);
       } else {

@@ -12,7 +12,7 @@ import { initialState } from 'src/app/store/view-state/view-state.reducer';
   templateUrl: './avatar-selection.component.html',
   styleUrls: ['./avatar-selection.component.scss']
 })
-export class AvatarSelectionComponent implements OnInit, OnDestroy {
+export class AvatarSelectionComponent implements OnInit {
   avatarIds = [
     'Memoji-01',
     'Memoji-02',
@@ -42,22 +42,10 @@ export class AvatarSelectionComponent implements OnInit, OnDestroy {
     'Memoji-26',
   ];
 
-  isAvatarSelectionScreenVisible = initialState.isAvatarSelectionScreenVisible;
-  private subscriptions: Subscription[] = [];
-
-  constructor(private store: Store<AppState>) {
-    this.subscriptions.push(
-      this.store.select(selectIsAvatarSelectionScreenVisible)
-        .subscribe(isAvatarSelectionScreenVisible => {
-          this.isAvatarSelectionScreenVisible = isAvatarSelectionScreenVisible;
-          if (isAvatarSelectionScreenVisible) {
-            this.store.dispatch(addBackButtonAction({ action: hideAvatarSelectionScreen }));
-          }
-        })
-    );
-  }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(addBackButtonAction({ action: hideAvatarSelectionScreen }));
   }
 
   close(): void {
@@ -67,9 +55,5 @@ export class AvatarSelectionComponent implements OnInit, OnDestroy {
   onAvatarSelection(avatarId: string) {
     this.store.dispatch(updateAvatarId({ avatarId }));
     this.close();
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
