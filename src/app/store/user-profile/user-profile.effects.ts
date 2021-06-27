@@ -4,7 +4,6 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { exhaustMap, tap } from 'rxjs/operators';
 import { UserProfileService } from "../../services/user-profile.service";
-import * as ViewStateActions from "../view-state/view-state.actions";
 import * as UserProfileActions from "./user-profile.actions";
 
 @Injectable()
@@ -19,11 +18,9 @@ export class UserProfileEffects {
 
   loadUserProfileDone$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.loadUserProfileDone),
-    tap(({ userProfile }) => {
-      if (!userProfile.name) {
-        this.router.navigate(['/', 'profile']);
-      } else {
-        this.router.navigate(['/', 'home']);
+    tap(() => {
+      if (window.location.pathname === '/') {
+        this.router.navigate(['home']);
       }
     })
   ), { dispatch: false });

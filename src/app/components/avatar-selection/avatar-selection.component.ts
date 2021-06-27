@@ -1,11 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { selectIsAvatarSelectionScreenVisible } from '../../store/view-state/view-state.selectors';
-import { addBackButtonAction, goBack, hideAvatarSelectionScreen } from '../../store/view-state/view-state.actions';
+import { navigateHeader, updateHeaderNavigation } from '../../store/header-navigation/header-navigation.actions';
 import { updateAvatarId } from 'src/app/store/user-profile/user-profile.actions';
-import { Subscription } from 'rxjs';
-import { initialState } from 'src/app/store/view-state/view-state.reducer';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
 
 @Component({
   selector: 'app-avatar-selection',
@@ -42,18 +41,30 @@ export class AvatarSelectionComponent implements OnInit {
     'Memoji-26',
   ];
 
-  constructor(private store: Store<AppState>) { }
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(addBackButtonAction({ action: hideAvatarSelectionScreen }));
-  }
-
-  close(): void {
-    this.store.dispatch(goBack());
+    this.store.dispatch(
+      updateHeaderNavigation({
+        headerNavigation: {
+          callback: this.onGoBack.bind(this),
+          headerButtonType: HeaderNavigationButtonType.NAVIGATE_BACKWARD,
+          isbuttonEnabled: true
+        }
+      })
+    );
   }
 
   onAvatarSelection(avatarId: string) {
     this.store.dispatch(updateAvatarId({ avatarId }));
-    this.close();
+    this.store.dispatch(navigateHeader());
+  }
+
+  onGoBack() {
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }

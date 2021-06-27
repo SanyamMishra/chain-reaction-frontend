@@ -4,6 +4,7 @@ import { AppLoaderComponent } from './components/app-loader/app-loader.component
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
+import { HomeGuard } from './guards/home.guard';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [HomeGuard]
   },
   {
     path: 'profile/select-avatar',
