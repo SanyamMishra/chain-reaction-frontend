@@ -4,6 +4,7 @@ import { AppLoaderComponent } from './components/app-loader/app-loader.component
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
+import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 import { HomeGuard } from './guards/home.guard';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [HomeGuard]
+    canActivate: [HomeGuard],
+    canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'profile/select-avatar',
@@ -23,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: UserProfileSettingsComponent
+    component: UserProfileSettingsComponent,
+    canDeactivate: [CanDeactivateGuard]
   }
 ];
 

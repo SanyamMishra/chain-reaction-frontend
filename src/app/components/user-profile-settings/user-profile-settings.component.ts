@@ -4,19 +4,20 @@ import { AppState } from 'src/app/store/app.state';
 import * as UserProfileSelectors from '../../store/user-profile/user-profile.selectors';
 import * as UserProfileActions from '../../store/user-profile/user-profile.actions';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, Data, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import * as HeaderNavigationActions from 'src/app/store/header-navigation/header-navigation.actions';
 import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
-import { map, take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { initialState } from 'src/app/store/user-profile/user-profile.reducer';
+import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 
 @Component({
   selector: 'app-user-profile-settings',
   templateUrl: './user-profile-settings.component.html',
   styleUrls: ['./user-profile-settings.component.scss']
 })
-export class UserProfileSettingsComponent implements OnInit, OnDestroy {
+export class UserProfileSettingsComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   avatarId$ = this.store.select(UserProfileSelectors.selectAvatarId);
   private _musicEnabled = initialState.musicEnabled;
   private _soundEffectsEnabled = initialState.soundEffectsEnabled;
@@ -68,12 +69,29 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     );
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  canDeactivate(nextState?: RouterStateSnapshot) {
+    if (nextState?.url === '/profile/select-avatar') {
+      return true;
+    }
+
+    const result = !!this.name;
+
+    if (result) {
+      this.userProfileService.temporaryName = null;
+      this.store.dispatch(HeaderNavigationActions.updateHeaderNavigation({ headerNavigation: null }));
+    }
+
+    return result;
+  }
+
   navigate() {
     this.store.dispatch(UserProfileActions.updateName({
       name: this.name as string
     }));
-
-    this.userProfileService.temporaryName = null;
 
     this.router.navigate(['/home'], { relativeTo: this.activatedRoute });
   }
@@ -130,9 +148,5 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy {
     } else {
       this.store.dispatch(UserProfileActions.disableVibration());
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
