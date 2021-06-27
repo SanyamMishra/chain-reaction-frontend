@@ -5,18 +5,19 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
+import { SharedModule } from './shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { userProfileReducer } from './store/user-profile/user-profile.reducer';
-import { UserProfileEffects } from './store/user-profile/user-profile.effects';
-import { ViewStateEffects } from './store/view-state/view-state.effects';
-import { SharedModule } from './shared.module';
+import { AppLoaderComponent } from './components/app-loader/app-loader.component';
+import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
+import { HomeComponent } from './components/home/home.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
 import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
-import { viewStateReducer } from './store/view-state/view-state.reducer';
-import { AppLoaderComponent } from './components/app-loader/app-loader.component';
-import { HeaderComponent } from './header/header.component';
+import { UserProfileEffects } from './store/user-profile/user-profile.effects';
+import { userProfileReducer } from './store/user-profile/user-profile.reducer';
+import { HeaderNavigationEffects } from './store/header-navigation/header-navigation.effects';
+import { headerNavigationReducer } from './store/header-navigation/header-navigation.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HeaderComponent } from './header/header.component';
     UserProfileSettingsComponent,
     AvatarSelectionComponent,
     AppLoaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +35,12 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     StoreModule.forRoot({
       userProfile: userProfileReducer,
-      viewState: viewStateReducer
+      headerNavigation: headerNavigationReducer
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([
       UserProfileEffects,
-      ViewStateEffects
+      HeaderNavigationEffects
     ]),
     SharedModule
   ],

@@ -9,7 +9,9 @@ import { loadUserProfile } from './store/user-profile/user-profile.actions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>) { }
+
+  ngOnInit(): void {
     this.store.dispatch(loadUserProfile());
   }
 }

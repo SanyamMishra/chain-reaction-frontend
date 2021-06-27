@@ -1,18 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
-import { selectIsAvatarSelectionScreenVisible } from '../../store/view-state/view-state.selectors';
-import { addBackButtonAction, goBack, hideAvatarSelectionScreen } from '../../store/view-state/view-state.actions';
+import { navigateHeader, updateHeaderNavigation } from '../../store/header-navigation/header-navigation.actions';
 import { updateAvatarId } from 'src/app/store/user-profile/user-profile.actions';
-import { Subscription } from 'rxjs';
-import { initialState } from 'src/app/store/view-state/view-state.reducer';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
 
 @Component({
   selector: 'app-avatar-selection',
   templateUrl: './avatar-selection.component.html',
   styleUrls: ['./avatar-selection.component.scss']
 })
-export class AvatarSelectionComponent implements OnInit, OnDestroy {
+export class AvatarSelectionComponent implements OnInit {
   avatarIds = [
     'Memoji-01',
     'Memoji-02',
@@ -42,34 +41,30 @@ export class AvatarSelectionComponent implements OnInit, OnDestroy {
     'Memoji-26',
   ];
 
-  isAvatarSelectionScreenVisible = initialState.isAvatarSelectionScreenVisible;
-  private subscriptions: Subscription[] = [];
-
-  constructor(private store: Store<AppState>) {
-    this.subscriptions.push(
-      this.store.select(selectIsAvatarSelectionScreenVisible)
-        .subscribe(isAvatarSelectionScreenVisible => {
-          this.isAvatarSelectionScreenVisible = isAvatarSelectionScreenVisible;
-          if (isAvatarSelectionScreenVisible) {
-            this.store.dispatch(addBackButtonAction({ action: hideAvatarSelectionScreen }));
-          }
-        })
-    );
-  }
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-  }
-
-  close(): void {
-    this.store.dispatch(goBack());
+    this.store.dispatch(
+      updateHeaderNavigation({
+        headerNavigation: {
+          callback: this.onGoBack.bind(this),
+          headerButtonType: HeaderNavigationButtonType.NAVIGATE_BACKWARD,
+          isbuttonEnabled: true
+        }
+      })
+    );
   }
 
   onAvatarSelection(avatarId: string) {
     this.store.dispatch(updateAvatarId({ avatarId }));
-    this.close();
+    this.store.dispatch(navigateHeader());
   }
 
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  onGoBack() {
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
   }
 }

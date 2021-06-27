@@ -1,5 +1,4 @@
-<div nz-row class="mt-5" nzAlign="middle" nzJustify="center"
-  [ngClass]="{'d-none': !(isUserProfileSettingsScreenVisible$ | async)}">
+<div nz-row class="mt-5" nzAlign="middle" nzJustify="center">
   <div nz-col nzSpan="24">
     <div nz-row nzAlign="middle" nzJustify="center">
       <div nz-col>
@@ -14,8 +13,8 @@
   <div nz-col nzSpan="24" class="mt-5">
     <div nz-row nzAlign="middle" nzJustify="center">
       <div nz-col>
-        <input nz-input placeholder="Enter Name" nzSize="large" class="text-center fs-2" [value]="name$ | async"
-          nzBorderless (blur)="onNameUpdate($event)" />
+        <input nz-input placeholder="Enter Name" nzSize="large" class="text-center fs-2" [(ngModel)]="name"
+          nzBorderless />
       </div>
     </div>
   </div>
@@ -42,5 +41,3 @@
   </div>
 
 </div>
-
-<app-avatar-selection></app-avatar-selection>

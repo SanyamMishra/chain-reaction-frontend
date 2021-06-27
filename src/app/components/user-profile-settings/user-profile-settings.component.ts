@@ -1,28 +1,58 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserProfile } from 'src/app/models/user-profile.model';
 import { AppState } from 'src/app/store/app.state';
 import * as UserProfileSelectors from '../../store/user-profile/user-profile.selectors';
 import * as UserProfileActions from '../../store/user-profile/user-profile.actions';
-import { showAvatarSelectionScreen } from '../../store/view-state/view-state.actions';
 import { Subscription } from 'rxjs';
-import { selectIsUserProfileSettingsScreenVisible } from 'src/app/store/view-state/view-state.selectors';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
+import * as HeaderNavigationActions from 'src/app/store/header-navigation/header-navigation.actions';
+import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
+import { take } from 'rxjs/operators';
+import { UserProfileService } from 'src/app/services/user-profile.service';
+import { initialState } from 'src/app/store/user-profile/user-profile.reducer';
+import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 
 @Component({
   selector: 'app-user-profile-settings',
   templateUrl: './user-profile-settings.component.html',
   styleUrls: ['./user-profile-settings.component.scss']
 })
-export class UserProfileSettingsComponent implements OnDestroy {
-  name$ = this.store.select(UserProfileSelectors.selectName);
+export class UserProfileSettingsComponent implements OnInit, OnDestroy, CanComponentDeactivate {
   avatarId$ = this.store.select(UserProfileSelectors.selectAvatarId);
-  isUserProfileSettingsScreenVisible$ = this.store.select(selectIsUserProfileSettingsScreenVisible);
-  private _musicEnabled = false;
-  private _soundEffectsEnabled = false;
-  private _vibrationEnabled = false;
+  private _musicEnabled = initialState.musicEnabled;
+  private _soundEffectsEnabled = initialState.soundEffectsEnabled;
+  private _vibrationEnabled = initialState.vibrationEnabled;
   private subscriptions: Subscription[] = [];
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private userProfileService: UserProfileService
+  ) { }
+
+  ngOnInit() {
+    this.subscriptions.push(
+      this.store.select(UserProfileSelectors.selectName)
+        .pipe(
+          take(1)
+        )
+        .subscribe(name => {
+          if (this.name === null) {
+            this.name = name;
+          }
+          this.store.dispatch(
+            HeaderNavigationActions.updateHeaderNavigation({
+              headerNavigation: {
+                callback: this.navigate.bind(this),
+                headerButtonType: name ? HeaderNavigationButtonType.NAVIGATE_BACKWARD : HeaderNavigationButtonType.NAVIGATE_FORWARD,
+                isbuttonEnabled: !!this.name
+              }
+            })
+          );
+        })
+    );
+
     this.subscriptions.push(
       this.store.select(UserProfileSelectors.selectMusicEnabled)
         .subscribe(musicEnabled => this._musicEnabled = musicEnabled)
@@ -39,14 +69,49 @@ export class UserProfileSettingsComponent implements OnDestroy {
     );
   }
 
-  onEditAvatarClick() {
-    this.store.dispatch(showAvatarSelectionScreen());
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  onNameUpdate(event: Event) {
+  canDeactivate(nextState?: RouterStateSnapshot) {
+    if (nextState?.url === '/profile/select-avatar') {
+      return true;
+    }
+
+    const result = !!this.name;
+
+    if (result) {
+      this.userProfileService.temporaryName = null;
+      this.store.dispatch(HeaderNavigationActions.updateHeaderNavigation({ headerNavigation: null }));
+    }
+
+    return result;
+  }
+
+  navigate() {
     this.store.dispatch(UserProfileActions.updateName({
-      name: (event.target as HTMLInputElement).value
+      name: this.name as string
     }));
+
+    this.router.navigate(['/home'], { relativeTo: this.activatedRoute });
+  }
+
+  onEditAvatarClick() {
+    this.router.navigate(['select-avatar'], { relativeTo: this.activatedRoute });
+  }
+
+  get name() {
+    return this.userProfileService.temporaryName;
+  }
+
+  set name(name) {
+    this.userProfileService.temporaryName = name;
+
+    if (name) {
+      this.store.dispatch(HeaderNavigationActions.enableHeaderNavigation());
+    } else {
+      this.store.dispatch(HeaderNavigationActions.disableHeaderNavigation());
+    }
   }
 
   get musicEnabled() {
@@ -83,9 +148,5 @@ export class UserProfileSettingsComponent implements OnDestroy {
     } else {
       this.store.dispatch(UserProfileActions.disableVibration());
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

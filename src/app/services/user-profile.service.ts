@@ -5,6 +5,8 @@ import { initialState } from '../store/user-profile/user-profile.reducer';
   providedIn: 'root'
 })
 export class UserProfileService {
+  temporaryName: string | null = null;
+
   loadUserProfile(): UserProfile {
     let userProfileData = localStorage.getItem('userProfile');
 

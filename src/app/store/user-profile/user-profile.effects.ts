@@ -1,24 +1,29 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
-import { exhaustMap } from 'rxjs/operators';
+import { exhaustMap, tap } from 'rxjs/operators';
 import { UserProfileService } from "../../services/user-profile.service";
-import * as ViewStateActions from "../view-state/view-state.actions";
 import * as UserProfileActions from "./user-profile.actions";
 
 @Injectable()
 export class UserProfileEffects {
   loadUserProfile$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.loadUserProfile),
-    exhaustMap((action) => {
+    exhaustMap(() => {
       const userProfile = this.userProfileService.loadUserProfile();
-      return of(
-        UserProfileActions.loadUserProfileDone({ userProfile }),
-        ViewStateActions.hideAppLoaderScreen(),
-        ViewStateActions.showUserProfileSettingsScreen()
-      );
+      return of(UserProfileActions.loadUserProfileDone({ userProfile }));
     })
   ));
+
+  loadUserProfileDone$ = createEffect(() => this.actions$.pipe(
+    ofType(UserProfileActions.loadUserProfileDone),
+    tap(() => {
+      if (window.location.pathname === '/') {
+        this.router.navigate(['home']);
+      }
+    })
+  ), { dispatch: false });
 
   updateName$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.updateName),
@@ -86,6 +91,7 @@ export class UserProfileEffects {
 
   constructor(
     private actions$: Actions,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private router: Router
   ) { }
 }

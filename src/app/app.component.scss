@@ -1,5 +1,10 @@
+div {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 4rem auto;
+}
 main {
-  margin-top: 4rem;
-  min-height: calc(100vh - 4rem);
-  background-color: #fff;
+  overflow-y: auto;
 }
