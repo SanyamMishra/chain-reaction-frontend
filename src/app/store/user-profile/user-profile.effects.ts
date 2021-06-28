@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { exhaustMap, tap } from 'rxjs/operators';
@@ -15,15 +14,6 @@ export class UserProfileEffects {
       return of(UserProfileActions.loadUserProfileDone({ userProfile }));
     })
   ));
-
-  loadUserProfileDone$ = createEffect(() => this.actions$.pipe(
-    ofType(UserProfileActions.loadUserProfileDone),
-    tap(() => {
-      if (window.location.pathname === '/') {
-        this.router.navigate(['home']);
-      }
-    })
-  ), { dispatch: false });
 
   updateName$ = createEffect(() => this.actions$.pipe(
     ofType(UserProfileActions.updateName),
@@ -91,7 +81,6 @@ export class UserProfileEffects {
 
   constructor(
     private actions$: Actions,
-    private userProfileService: UserProfileService,
-    private router: Router
+    private userProfileService: UserProfileService
   ) { }
 }
