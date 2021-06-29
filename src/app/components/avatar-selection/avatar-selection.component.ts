@@ -3,8 +3,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.state';
 import { navigateHeader, updateHeaderNavigation } from '../../store/header-navigation/header-navigation.actions';
 import { updateAvatarId } from 'src/app/store/user-profile/user-profile.actions';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-avatar-selection',
@@ -43,8 +44,8 @@ export class AvatarSelectionComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
@@ -65,6 +66,6 @@ export class AvatarSelectionComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+    this.navigationService.navigateBack(this.activatedRoute)
   }
 }

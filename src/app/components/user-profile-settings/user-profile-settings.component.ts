@@ -11,6 +11,7 @@ import { take } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { initialState } from 'src/app/store/user-profile/user-profile.reducer';
 import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Component({
   selector: 'app-user-profile-settings',
@@ -28,7 +29,8 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy, CanCompo
     private store: Store<AppState>,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private userProfileService: UserProfileService
+    private userProfileService: UserProfileService,
+    private navigationService: NavigationService
   ) { }
 
   ngOnInit() {
@@ -93,7 +95,7 @@ export class UserProfileSettingsComponent implements OnInit, OnDestroy, CanCompo
       name: this.name as string
     }));
 
-    this.router.navigate(['/home'], { relativeTo: this.activatedRoute });
+    this.navigationService.navigateBack(this.activatedRoute);
   }
 
   onEditAvatarClick() {
