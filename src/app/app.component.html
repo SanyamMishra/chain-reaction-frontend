@@ -1,6 +1,6 @@
 <div>
   <app-header></app-header>
-  <main class="px-4 h-100">
-    <router-outlet></router-outlet>
+  <main class="px-4 h-100" [@routeAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
   </main>
 </div>

@@ -17,16 +17,19 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     canActivate: [HomeGuard],
-    canDeactivate: [CanDeactivateGuard]
+    canDeactivate: [CanDeactivateGuard],
+    data: { animation: 'HomePage' }
   },
   {
     path: 'profile/select-avatar',
-    component: AvatarSelectionComponent
+    component: AvatarSelectionComponent,
+    data: { animation: 'ProfileSelectAvatarPage' }
   },
   {
     path: 'profile',
     component: UserProfileSettingsComponent,
-    canDeactivate: [CanDeactivateGuard]
+    canDeactivate: [CanDeactivateGuard],
+    data: { animation: 'ProfilePage' }
   }
 ];
 
