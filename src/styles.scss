@@ -1,13 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@use './assets/styles/variables';
+
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 @import '~bootstrap/dist/css/bootstrap-utilities.min.css';
 
-$header-height: 4rem;
-
 .page-container {
-  height: calc(100vh - #{$header-height});
+  height: calc(100vh - #{variables.$header-height});
 }

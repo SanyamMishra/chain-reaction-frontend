@@ -1,11 +1,11 @@
-@use '../styles.scss' as styles;
+@use '../assets/styles/variables';
 
 div {
   width: 100vw;
   height: 100vh;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: styles.$header-height auto;
+  grid-template-rows: variables.$header-height auto;
 }
 main {
   overflow-y: auto;
