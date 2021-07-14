@@ -1,3 +1,5 @@
+@use '../../../assets/styles/variables';
+
 .card {
   padding: 1rem;
   text-align: center;
@@ -10,7 +12,7 @@ img {
 .special-button {
   width: 16rem;
   padding: 0.6rem;
-  background-color: #1890ff;
+  background-color: variables.$primary-color;
   border: none;
   color: white;
   border-radius: 0.6rem;

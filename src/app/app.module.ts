@@ -19,6 +19,8 @@ import { UserProfileEffects } from './store/user-profile/user-profile.effects';
 import { userProfileReducer } from './store/user-profile/user-profile.reducer';
 import { HeaderNavigationEffects } from './store/header-navigation/header-navigation.effects';
 import { headerNavigationReducer } from './store/header-navigation/header-navigation.reducer';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,13 @@ import { headerNavigationReducer } from './store/header-navigation/header-naviga
       UserProfileEffects,
       HeaderNavigationEffects
     ]),
-    SharedModule
+    SharedModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
