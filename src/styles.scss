@@ -5,3 +5,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 @import '~bootstrap/dist/css/bootstrap-utilities.min.css';
+
+$header-height: 4rem;
+
+.page-container {
+  height: calc(100vh - #{$header-height});
+}

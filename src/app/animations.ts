@@ -1,5 +1,7 @@
 import { animate, animateChild, AnimationMetadata, group, query, style, transition, trigger } from "@angular/animations";
 
+const animationSpeed = '300ms';
+
 const slideIn: AnimationMetadata[] = [
   style({ position: 'relative' }),
   query(':enter, :leave', [
@@ -16,10 +18,10 @@ const slideIn: AnimationMetadata[] = [
   query(':leave', animateChild()),
   group([
     query(':leave', [
-      animate('300ms ease-out', style({ left: '-100%' }))
+      animate(`${animationSpeed} ease-out`, style({ left: '-100%' }))
     ]),
     query(':enter', [
-      animate('300ms ease-out', style({ left: '1.5rem' }))
+      animate(`${animationSpeed} ease-out`, style({ left: '1.5rem' }))
     ])
   ]),
   query(':enter', animateChild()),
@@ -41,10 +43,10 @@ const slideOut: AnimationMetadata[] = [
   query(':leave', animateChild()),
   group([
     query(':leave', [
-      animate('300ms ease-out', style({ left: '100%' }))
+      animate(`${animationSpeed} ease-out`, style({ left: '100%' }))
     ]),
     query(':enter', [
-      animate('300ms ease-out', style({ left: '1.5rem' }))
+      animate(`${animationSpeed} ease-out`, style({ left: '1.5rem' }))
     ])
   ]),
   query(':enter', animateChild()),

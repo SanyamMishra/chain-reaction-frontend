@@ -1,9 +1,11 @@
+@use '../styles.scss' as styles;
+
 div {
   width: 100vw;
   height: 100vh;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 4rem auto;
+  grid-template-rows: styles.$header-height auto;
 }
 main {
   overflow-y: auto;

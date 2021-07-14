@@ -1,6 +1,7 @@
 export enum HeaderNavigationButtonType {
   NAVIGATE_BACKWARD,
-  NAVIGATE_FORWARD
+  NAVIGATE_FORWARD,
+  OPEN_PROFILE_SETTINGS
 }
 
 export interface HeaderNavigation {

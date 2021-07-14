@@ -44,6 +44,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.headerNavigationButtonType === HeaderNavigationButtonType.NAVIGATE_FORWARD;
   }
 
+  isOpenProfileSettingsButtonVisible() {
+    return this.isHeaderNavigationButtonEnabled &&
+      this.headerNavigationButtonType === HeaderNavigationButtonType.OPEN_PROFILE_SETTINGS;
+  }
+
   onClickNavigateButton() {
     this.store.dispatch(navigateHeader());
   }
