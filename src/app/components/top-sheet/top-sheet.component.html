@@ -1,0 +1,12 @@
+<div class="top-sheet-container" @openClose>
+  <div class="top-sheet-background" (click)="onClose()"></div>
+  <div nz-row class="top-sheet shadow-lg" nzJustify="center">
+    <div nz-col nzFlex="auto">
+      <div nz-row nzJustify="center">
+        <div nz-col>
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

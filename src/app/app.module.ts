@@ -12,15 +12,17 @@ import { AppComponent } from './app.component';
 import { AppLoaderComponent } from './components/app-loader/app-loader.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
-import { HomeComponent } from './components/home/home.component';
-import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
-import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UserProfileSettingsComponent } from './pages/user-profile-settings/user-profile-settings.component';
+import { AvatarSelectionComponent } from './pages/avatar-selection/avatar-selection.component';
 import { UserProfileEffects } from './store/user-profile/user-profile.effects';
 import { userProfileReducer } from './store/user-profile/user-profile.reducer';
 import { HeaderNavigationEffects } from './store/header-navigation/header-navigation.effects';
 import { headerNavigationReducer } from './store/header-navigation/header-navigation.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { TopSheetComponent } from './components/top-sheet/top-sheet.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { environment } from '../environments/environment';
     AvatarSelectionComponent,
     AppLoaderComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    TopSheetComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

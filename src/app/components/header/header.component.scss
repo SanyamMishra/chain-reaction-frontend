@@ -1,9 +1,10 @@
+@use "sass:color";
 @use '../../../assets/styles/variables';
 
 header {
   width: 100%;
   height: 100%;
-  background-color: darken(variables.$primary-color, 30%);
+  background-color: color.scale(variables.$primary-color, $lightness: -50%);
   z-index: 1;
 }
 

@@ -12,6 +12,19 @@ import { updateHeaderNavigation } from 'src/app/store/header-navigation/header-n
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements CanComponentDeactivate {
+  isJoinRoomTopSheetVisible = false;
+  isCreateRoomTopSheetVisible = false;
+  roomColors = [
+    '#0D1321',
+    '#F0EBD8',
+    '#136F63',
+    '#C6D8FF',
+    '#192BC2',
+    '#7353BA',
+    '#F95738',
+    '#F4D35E'
+  ];
+  selectedColorIndex = 0;
 
   constructor(
     private store: Store<AppState>,
@@ -40,5 +53,9 @@ export class HomeComponent implements CanComponentDeactivate {
 
   onOpenProfileSettings() {
     this.router.navigate(['profile']);
+  }
+
+  onColorSelect(i: number) {
+    this.selectedColorIndex = i;
   }
 }
