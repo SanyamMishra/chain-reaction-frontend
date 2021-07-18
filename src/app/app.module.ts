@@ -19,6 +19,7 @@ import { UserProfileEffects } from './store/user-profile/user-profile.effects';
 import { userProfileReducer } from './store/user-profile/user-profile.reducer';
 import { HeaderNavigationEffects } from './store/header-navigation/header-navigation.effects';
 import { headerNavigationReducer } from './store/header-navigation/header-navigation.reducer';
+import { gameReducer } from './store/game/game.reducer';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { TopSheetComponent } from './components/top-sheet/top-sheet.component';
@@ -43,7 +44,8 @@ import { ButtonComponent } from './components/button/button.component';
     FormsModule,
     StoreModule.forRoot({
       userProfile: userProfileReducer,
-      headerNavigation: headerNavigationReducer
+      headerNavigation: headerNavigationReducer,
+      game: gameReducer
     }),
     StoreDevtoolsModule.instrument(),
     EffectsModule.forRoot([

@@ -6,15 +6,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
-  @Output('click') click = new EventEmitter();
-  @Input('disabled') disabled!: boolean;
+  @Output('onClick') click = new EventEmitter<boolean>();
+  @Input('disabled') disabled = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   onClick() {
-    console.log(this.disabled);
     if (!this.disabled) {
       this.click.emit();
     }

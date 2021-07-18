@@ -4,7 +4,7 @@
       <div nz-col>
         <div class="card">
           <img src="assets/CreateRoom.png" alt="Create Room">
-          <app-button class="mt-3" (click)="isCreateRoomTopSheetVisible = true">Create Room</app-button>
+          <app-button class="mt-3 room-cta" (click)="isCreateRoomTopSheetVisible = true">Create Room</app-button>
         </div>
       </div>
     </div>
@@ -14,56 +14,48 @@
       <div nz-col>
         <div class="card">
           <img src="assets/JoinRoom.png" alt="Join Room">
-          <app-button class="mt-3" (click)="isJoinRoomTopSheetVisible = true">Join Room</app-button>
+          <app-button class="mt-3 room-cta" (click)="isJoinRoomTopSheetVisible = true">Join Room</app-button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<app-top-sheet *ngIf="isCreateRoomTopSheetVisible" (onClose)="isCreateRoomTopSheetVisible = false">
+<app-top-sheet *ngIf="isCreateRoomTopSheetVisible" (close)="onCloseCreateRoomTopSheet()">
   <div nz-row nzAlign="middle" nzJustify="center" class="px-3 pb-3 pt-5">
-    <div nz-col nzSpan="24" class="mb-5">
-      <div nz-row [nzGutter]="[16, 24]">
-        <div nz-col nzXs="6" nzLg="3" *ngFor="let roomColor of roomColors; let i = index">
-          <div nz-row nzAlign="middle" nzJustify="center">
-            <div nz-col>
-              <div class="room-color-marbel" [ngStyle]="{backgroundColor: roomColor}"
-                [ngClass]="{'active': i === selectedColorIndex}" (click)="onColorSelect(i)">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ng-container *ngTemplateOutlet="playerColorSelector"></ng-container>
     <div nz-col nzSpan="24">
-      <app-button style="width: 100%;" class="mt-3" (click)="isCreateRoomTopSheetVisible = false">Proceed</app-button>
+      <app-button class="mt-3 room-top-sheet-cta" (onClick)="onProceed()">Proceed</app-button>
     </div>
   </div>
 </app-top-sheet>
 
 
-<app-top-sheet *ngIf="isJoinRoomTopSheetVisible" (onClose)="isJoinRoomTopSheetVisible = false">
+<app-top-sheet *ngIf="isJoinRoomTopSheetVisible" (open)="roomCodeInput.focus()" (close)="onCloseJoinRoomTopSheet()">
   <div nz-row nzAlign="middle" nzJustify="center" class="p-3">
     <div nz-col nzSpan="24" class="mb-5">
-      <input nz-input placeholder="Enter Room Code" nzSize="large" class="text-center fs-2" nzBorderless />
+      <input #roomCodeInput [(ngModel)]="roomCode" nz-input placeholder="Enter Room Code" nzSize="large"
+        class="text-center fs-2" nzBorderless />
     </div>
-    <div nz-col nzSpan="24" class="mb-5">
-      <div nz-row [nzGutter]="[16, 24]">
-        <div nz-col nzXs="6" nzLg="3" *ngFor="let roomColor of roomColors; let i = index">
-          <div nz-row nzAlign="middle" nzJustify="center">
-            <div nz-col>
-              <div class="room-color-marbel" [ngStyle]="{backgroundColor: roomColor}"
-                [ngClass]="{'active': i === selectedColorIndex}">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ng-container *ngTemplateOutlet="playerColorSelector"></ng-container>
     <div nz-col nzSpan="24">
-      <app-button style="width: 100%;" class="mt-3" [disabled]="true" (click)="isJoinRoomTopSheetVisible = false">
+      <app-button class="mt-3 room-top-sheet-cta" [disabled]="!roomCodeInput.value.length" (onClick)="onProceed()">
         Proceed</app-button>
     </div>
   </div>
 </app-top-sheet>
+
+<ng-template #playerColorSelector>
+  <div nz-col nzSpan="24" class="mb-5">
+    <div nz-row [nzGutter]="[16, 24]">
+      <div nz-col nzXs="6" nzLg="3" *ngFor="let color of getPlayerColors()">
+        <div nz-row nzAlign="middle" nzJustify="center">
+          <div nz-col>
+            <div class="room-color-marbel" [ngStyle]="{backgroundColor: color}" (click)="onColorSelect(color)"
+              [ngClass]="{active: color === (playerColor$ | async)}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

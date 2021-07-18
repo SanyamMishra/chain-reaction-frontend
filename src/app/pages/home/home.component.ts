@@ -5,7 +5,11 @@ import { CanComponentDeactivate } from 'src/app/guards/can-deactivate.guard';
 import { HeaderNavigationButtonType } from 'src/app/models/header-navigation.model';
 import { AppState } from 'src/app/store/app.state';
 import { updateHeaderNavigation } from 'src/app/store/header-navigation/header-navigation.actions';
-
+import { PlayerColor } from 'src/app/models/game.model';
+import * as GameSelectors from 'src/app/store/game/game.selectors';
+import * as GameActions from 'src/app/store/game/game.actions';
+import { initialState as gameInitialState } from 'src/app/store/game/game.reducer';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,17 +18,9 @@ import { updateHeaderNavigation } from 'src/app/store/header-navigation/header-n
 export class HomeComponent implements CanComponentDeactivate {
   isJoinRoomTopSheetVisible = false;
   isCreateRoomTopSheetVisible = false;
-  roomColors = [
-    '#0D1321',
-    '#F0EBD8',
-    '#136F63',
-    '#C6D8FF',
-    '#192BC2',
-    '#7353BA',
-    '#F95738',
-    '#F4D35E'
-  ];
-  selectedColorIndex = 0;
+  playerColor$ = this.store.select(GameSelectors.selectPlayerColor);
+  roomCode = gameInitialState.roomCode;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -51,11 +47,49 @@ export class HomeComponent implements CanComponentDeactivate {
     );
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   onOpenProfileSettings() {
     this.router.navigate(['profile']);
   }
 
-  onColorSelect(i: number) {
-    this.selectedColorIndex = i;
+  getPlayerColors() {
+    const colors = [];
+    
+    for(let playerColor of Object.values(PlayerColor)) {
+      colors.push(playerColor);
+    }
+
+    return colors;
+  }
+
+  onColorSelect(playerColor: PlayerColor) {
+    this.store.dispatch(GameActions.setPlayerColor({playerColor}));
+  }
+
+  resetPlayerColor() {
+    this.store.dispatch(GameActions.resetPlayerColor());
+  }
+
+  onCloseCreateRoomTopSheet(isProceeding = false) {
+    this.isCreateRoomTopSheetVisible = false;
+    !isProceeding && this.resetPlayerColor();
+  }
+
+  onCloseJoinRoomTopSheet(isProceeding = false) {
+    this.isJoinRoomTopSheetVisible = false;
+
+    if(!isProceeding) {
+      this.roomCode = gameInitialState.roomCode;
+      this.resetPlayerColor();
+    }
+  }
+
+  onProceed() {
+    this.store.dispatch(GameActions.setRoomCode({roomCode: this.roomCode}));
+    this.onCloseCreateRoomTopSheet(true);
+    this.onCloseJoinRoomTopSheet(true);
   }
 }

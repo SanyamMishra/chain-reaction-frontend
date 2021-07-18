@@ -40,14 +40,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
     ])
   ]
 })
-export class TopSheetComponent implements OnInit {
-  @Output('onClose') closed = new EventEmitter();
+export class TopSheetComponent {
+  @Output('open') open = new EventEmitter();
+  @Output('close') close = new EventEmitter();
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit() {
+    this.open.emit();
   }
 
   onClose() {
-    this.closed.emit();
+    this.close.emit();
   }
 }
