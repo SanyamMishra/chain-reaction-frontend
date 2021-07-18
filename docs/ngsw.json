@@ -1,0 +1,139 @@
+{
+  "configVersion": 1,
+  "timestamp": 1626582731115,
+  "index": "/chain-reaction-frontend/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/chain-reaction-frontend/favicon.ico",
+        "/chain-reaction-frontend/index.html",
+        "/chain-reaction-frontend/main.50615321d64c20577676.js",
+        "/chain-reaction-frontend/manifest.webmanifest",
+        "/chain-reaction-frontend/polyfills.24a116bd24b1dddda574.js",
+        "/chain-reaction-frontend/runtime.9687eeaf4ce8bc3ba5fb.js",
+        "/chain-reaction-frontend/styles.72e9a36f1de6146bb17c.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/chain-reaction-frontend/assets/CreateRoom.png",
+        "/chain-reaction-frontend/assets/JoinRoom.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-01.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-02.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-03.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-04.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-05.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-06.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-07.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-08.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-09.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-10.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-11.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-12.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-13.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-14.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-15.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-16.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-17.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-18.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-19.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-20.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-21.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-22.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-23.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-24.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-25.png",
+        "/chain-reaction-frontend/assets/avatars/Memoji-26.png",
+        "/chain-reaction-frontend/assets/icons/icon-128x128.png",
+        "/chain-reaction-frontend/assets/icons/icon-144x144.png",
+        "/chain-reaction-frontend/assets/icons/icon-152x152.png",
+        "/chain-reaction-frontend/assets/icons/icon-192x192.png",
+        "/chain-reaction-frontend/assets/icons/icon-384x384.png",
+        "/chain-reaction-frontend/assets/icons/icon-512x512.png",
+        "/chain-reaction-frontend/assets/icons/icon-72x72.png",
+        "/chain-reaction-frontend/assets/icons/icon-96x96.png",
+        "/chain-reaction-frontend/assets/styles/_variables.scss"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/chain-reaction-frontend/assets/CreateRoom.png": "a55ec1c9ec6d9208feff43bb0940ef675d554281",
+    "/chain-reaction-frontend/assets/JoinRoom.png": "af7a1280a8ce61c5425b2dc6cf8870ffbdec68e9",
+    "/chain-reaction-frontend/assets/avatars/Memoji-01.png": "f002115f55e9dfa13528b2028675476cd243a319",
+    "/chain-reaction-frontend/assets/avatars/Memoji-02.png": "008fa22d86d29428559318997d640feb7199ff1d",
+    "/chain-reaction-frontend/assets/avatars/Memoji-03.png": "dcfaf1a359a19cb4de28a6465dffd4aebc55c4e0",
+    "/chain-reaction-frontend/assets/avatars/Memoji-04.png": "bf1e894116b28ea7a5d26d7bf5a49ea7aee10c99",
+    "/chain-reaction-frontend/assets/avatars/Memoji-05.png": "69744ee6f792fe133cb6632eb545bc2e53d34cff",
+    "/chain-reaction-frontend/assets/avatars/Memoji-06.png": "0f05675f20238493e1ac71724d47e0df9e169095",
+    "/chain-reaction-frontend/assets/avatars/Memoji-07.png": "d5d7d1017e5a5613e31b6ec335c3be84b3438c75",
+    "/chain-reaction-frontend/assets/avatars/Memoji-08.png": "c421cd2e261ecfdc51a2eea469c4adabbaa8f41e",
+    "/chain-reaction-frontend/assets/avatars/Memoji-09.png": "ccf1569399182febdb799d167b2c107e67fae831",
+    "/chain-reaction-frontend/assets/avatars/Memoji-10.png": "26ee5f56934698c3b8de46757e3b81bba1c9c351",
+    "/chain-reaction-frontend/assets/avatars/Memoji-11.png": "5e24f6ef8c19732e7cba50b84f12c8eb3b981343",
+    "/chain-reaction-frontend/assets/avatars/Memoji-12.png": "4e9eeae27a1d91f564a901bdc3550f6e13407851",
+    "/chain-reaction-frontend/assets/avatars/Memoji-13.png": "7c766960387c7dca0bd98683ec35c21a9b856a16",
+    "/chain-reaction-frontend/assets/avatars/Memoji-14.png": "c37c06cd107d6e38098703437bfd7f5ed8b1f629",
+    "/chain-reaction-frontend/assets/avatars/Memoji-15.png": "dbf0e5f582932136b2c6a45d82b2f4b0e1edec8f",
+    "/chain-reaction-frontend/assets/avatars/Memoji-16.png": "cfff52c42812b3de49639966850fd960c21e96d0",
+    "/chain-reaction-frontend/assets/avatars/Memoji-17.png": "4f57fe117bdc43b8092a6b9c3af6e26661156d66",
+    "/chain-reaction-frontend/assets/avatars/Memoji-18.png": "a8eb8a35f388451a02c25ca9f17de24a5a8a2653",
+    "/chain-reaction-frontend/assets/avatars/Memoji-19.png": "2dcbe9fd149bc43df46b9146adeb4af680754588",
+    "/chain-reaction-frontend/assets/avatars/Memoji-20.png": "9572889eb469d9545e61befe42d75e2ade5a31cd",
+    "/chain-reaction-frontend/assets/avatars/Memoji-21.png": "89ea9e63cbc5d1e33d0ac76fe46799ecdc02dc11",
+    "/chain-reaction-frontend/assets/avatars/Memoji-22.png": "533186b13ad950ff5bdb84b4c039fb540670f0cc",
+    "/chain-reaction-frontend/assets/avatars/Memoji-23.png": "2b5e40dceea729ced3d450b99a3c2df07fbb8849",
+    "/chain-reaction-frontend/assets/avatars/Memoji-24.png": "d3cf892ab52d2343ab6a4b60f89268051b5c4945",
+    "/chain-reaction-frontend/assets/avatars/Memoji-25.png": "a75536a976a7afc7844865b3f4b75ba77345e243",
+    "/chain-reaction-frontend/assets/avatars/Memoji-26.png": "53364dbe4facc5783327ae435cb5a3278d521534",
+    "/chain-reaction-frontend/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/chain-reaction-frontend/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/chain-reaction-frontend/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/chain-reaction-frontend/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/chain-reaction-frontend/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/chain-reaction-frontend/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/chain-reaction-frontend/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/chain-reaction-frontend/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/chain-reaction-frontend/assets/styles/_variables.scss": "334f3f8dd6768228905522cdc89af043f83b707f",
+    "/chain-reaction-frontend/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/chain-reaction-frontend/index.html": "5b95218d7d08278a246b1182b68efacda5d6c0ad",
+    "/chain-reaction-frontend/main.50615321d64c20577676.js": "f3b5ce5f97d987c24e9f2492d0d7acbdf02e8860",
+    "/chain-reaction-frontend/manifest.webmanifest": "28361e5eb2979f6bfa1b4dcd673fe4d08e004f2e",
+    "/chain-reaction-frontend/polyfills.24a116bd24b1dddda574.js": "36d11c20d1ce3bddbbb0f69bb5c496cda21521f2",
+    "/chain-reaction-frontend/runtime.9687eeaf4ce8bc3ba5fb.js": "c8690d01a44e2e6043788ec1c14abc502380f8d0",
+    "/chain-reaction-frontend/styles.72e9a36f1de6146bb17c.css": "53e2a08ab36d03e2fd4854f4d72cb992da117c4a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
