@@ -1,0 +1,61 @@
+<div nz-row class="page-container">
+  <div nz-col nzXs="24" nzMd="12" nzLg="12" nzXl="12">
+    <div nz-row class="h-100" nzAlign="middle" nzJustify="center">
+      <div nz-col>
+        <div class="card">
+          <img src="assets/CreateRoom.png" alt="Create Room">
+          <app-button class="mt-3 room-cta" (click)="isCreateRoomTopSheetVisible = true">Create Room</app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzMd="12" nzLg="12" nzXl="12">
+    <div nz-row class="h-100" nzAlign="middle" nzJustify="center">
+      <div nz-col>
+        <div class="card">
+          <img src="assets/JoinRoom.png" alt="Join Room">
+          <app-button class="mt-3 room-cta" (click)="isJoinRoomTopSheetVisible = true">Join Room</app-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-top-sheet *ngIf="isCreateRoomTopSheetVisible" (close)="onCloseCreateRoomTopSheet()">
+  <div nz-row nzAlign="middle" nzJustify="center" class="px-3 pb-3 pt-5">
+    <ng-container *ngTemplateOutlet="playerColorSelector"></ng-container>
+    <div nz-col nzSpan="24">
+      <app-button class="mt-3 room-top-sheet-cta" (onClick)="onProceed()">Proceed</app-button>
+    </div>
+  </div>
+</app-top-sheet>
+
+
+<app-top-sheet *ngIf="isJoinRoomTopSheetVisible" (open)="roomCodeInput.focus()" (close)="onCloseJoinRoomTopSheet()">
+  <div nz-row nzAlign="middle" nzJustify="center" class="p-3">
+    <div nz-col nzSpan="24" class="mb-5">
+      <input #roomCodeInput [(ngModel)]="roomCode" nz-input placeholder="Enter Room Code" nzSize="large"
+        class="text-center fs-2" nzBorderless />
+    </div>
+    <ng-container *ngTemplateOutlet="playerColorSelector"></ng-container>
+    <div nz-col nzSpan="24">
+      <app-button class="mt-3 room-top-sheet-cta" [disabled]="!roomCodeInput.value.length" (onClick)="onProceed()">
+        Proceed</app-button>
+    </div>
+  </div>
+</app-top-sheet>
+
+<ng-template #playerColorSelector>
+  <div nz-col nzSpan="24" class="mb-5">
+    <div nz-row [nzGutter]="[16, 24]">
+      <div nz-col nzXs="6" nzLg="3" *ngFor="let color of getPlayerColors()">
+        <div nz-row nzAlign="middle" nzJustify="center">
+          <div nz-col>
+            <div class="room-color-marbel" [ngStyle]="{backgroundColor: color}" (click)="onColorSelect(color)"
+              [ngClass]="{active: color === (playerColor$ | async)}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

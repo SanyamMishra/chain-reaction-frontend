@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppLoaderComponent } from './components/app-loader/app-loader.component';
-import { AvatarSelectionComponent } from './components/avatar-selection/avatar-selection.component';
-import { HomeComponent } from './components/home/home.component';
-import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
+import { AvatarSelectionComponent } from './pages/avatar-selection/avatar-selection.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UserProfileSettingsComponent } from './pages/user-profile-settings/user-profile-settings.component';
 import { CanDeactivateGuard } from './guards/can-deactivate.guard';
 import { HomeGuard } from './guards/home.guard';
 
