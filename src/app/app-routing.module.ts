@@ -10,12 +10,8 @@ import { HomeGuard } from './guards/home.guard';
 const routes: Routes = [
   {
     path: '',
-    component: AppLoaderComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
     component: HomeComponent,
+    pathMatch: 'full',
     canActivate: [HomeGuard],
     canDeactivate: [CanDeactivateGuard],
     data: { animation: 'HomePage' }

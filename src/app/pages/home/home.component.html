@@ -1,5 +1,10 @@
 <div nz-row class="page-container">
-  <div nz-col nzXs="24" nzMd="12" nzLg="12" nzXl="12">
+  <div nz-col nzSpan="24" *ngIf="isLoading">
+    <div nz-row class="h-100" nzAlign="middle" nzJustify="center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+  <div nz-col nzXs="24" nzMd="12" *ngIf="!isLoading">
     <div nz-row class="h-100" nzAlign="middle" nzJustify="center">
       <div nz-col>
         <div class="card">
@@ -9,7 +14,7 @@
       </div>
     </div>
   </div>
-  <div nz-col nzXs="24" nzMd="12" nzLg="12" nzXl="12">
+  <div nz-col nzXs="24" nzMd="12" *ngIf="!isLoading">
     <div nz-row class="h-100" nzAlign="middle" nzJustify="center">
       <div nz-col>
         <div class="card">

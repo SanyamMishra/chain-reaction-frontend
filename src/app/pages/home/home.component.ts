@@ -10,12 +10,14 @@ import * as GameSelectors from 'src/app/store/game/game.selectors';
 import * as GameActions from 'src/app/store/game/game.actions';
 import { initialState as gameInitialState } from 'src/app/store/game/game.reducer';
 import { Subscription } from 'rxjs';
+import { selectUserProfile } from 'src/app/store/user-profile/user-profile.selectors';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements CanComponentDeactivate {
+  isLoading = true;
   isJoinRoomTopSheetVisible = false;
   isCreateRoomTopSheetVisible = false;
   playerColor$ = this.store.select(GameSelectors.selectPlayerColor);
@@ -45,6 +47,11 @@ export class HomeComponent implements CanComponentDeactivate {
         }
       })
     );
+
+    // this.subscriptions.push(
+    //   this.store.select(selectUserProfile)
+    //     .subscribe(() => this.isLoading = false)
+    // );
   }
 
   ngOnDestroy() {
@@ -57,8 +64,8 @@ export class HomeComponent implements CanComponentDeactivate {
 
   getPlayerColors() {
     const colors = [];
-    
-    for(let playerColor of Object.values(PlayerColor)) {
+
+    for (let playerColor of Object.values(PlayerColor)) {
       colors.push(playerColor);
     }
 
@@ -66,7 +73,7 @@ export class HomeComponent implements CanComponentDeactivate {
   }
 
   onColorSelect(playerColor: PlayerColor) {
-    this.store.dispatch(GameActions.setPlayerColor({playerColor}));
+    this.store.dispatch(GameActions.setPlayerColor({ playerColor }));
   }
 
   resetPlayerColor() {
@@ -81,14 +88,14 @@ export class HomeComponent implements CanComponentDeactivate {
   onCloseJoinRoomTopSheet(isProceeding = false) {
     this.isJoinRoomTopSheetVisible = false;
 
-    if(!isProceeding) {
+    if (!isProceeding) {
       this.roomCode = gameInitialState.roomCode;
       this.resetPlayerColor();
     }
   }
 
   onProceed() {
-    this.store.dispatch(GameActions.setRoomCode({roomCode: this.roomCode}));
+    this.store.dispatch(GameActions.setRoomCode({ roomCode: this.roomCode }));
     this.onCloseCreateRoomTopSheet(true);
     this.onCloseJoinRoomTopSheet(true);
   }
